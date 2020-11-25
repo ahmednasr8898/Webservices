@@ -4,10 +4,8 @@
 //
 //  Created by Ahmed Nasr on 10/14/20.
 //
-
 import UIKit
 import Alamofire
-
 
 class PhotoViewController: UIViewController {
 
@@ -30,10 +28,8 @@ class PhotoViewController: UIViewController {
         AF.request(url , method:  .get , encoding: URLEncoding.default).responseJSON { (response) in
  
             switch response.result{
-
             case .failure(let error):
                 print("connection with server is faild \(error)")
-            
             case .success(let value):
                 print("connection with server is success \(value)")
                 

@@ -4,7 +4,6 @@
 //
 //  Created by Ahmed Nasr on 10/13/20.
 //
-
 import UIKit
 import Alamofire
 import SwiftyJSON
@@ -58,8 +57,7 @@ class PostsViewController: UIViewController, UITableViewDataSource , UITableView
         //USERS API
         cell.textLabel?.text = arrOfUsers[indexPath.row].companyName
         cell.detailTextLabel?.text = arrOfUsers[indexPath.row].catchPhrase
-        
-        
+      
         return cell
     }
     
@@ -76,14 +74,12 @@ class PostsViewController: UIViewController, UITableViewDataSource , UITableView
 }
 
 extension PostsViewController{
-    
     func getPosts(){
         let url = "https://jsonplaceholder.typicode.com/posts"
         
         AF.request(url , method: .get , encoding: URLEncoding.default).responseJSON { (response) in
             
             switch response.result{
-            
             case .failure(let error):
                 print("Connecting with server is falid:\(error)")
             case .success(let value):
@@ -107,17 +103,13 @@ extension PostsViewController{
 }
 
 extension PostsViewController{
-    
     func getComments(){
         
         let url = "https://jsonplaceholder.typicode.com/comments"
 
-        AF.request(url , method: .get , encoding: URLEncoding.default)
-            .responseJSON { (response) in
+        AF.request(url , method: .get , encoding: URLEncoding.default).responseJSON { (response) in
                 
                 switch response.result{
-                
-                
                 case .failure(let error):
                     print("Connection with server is falid \(error)")
                     
@@ -143,20 +135,15 @@ extension PostsViewController{
 }
 
 extension PostsViewController{
-    
-    
     func getUsers(){
-        
         let url = "https://jsonplaceholder.typicode.com/users"
         
-        AF.request(url , method: .get , encoding: URLEncoding.default)
-            .responseJSON { (response) in
+        AF.request(url , method: .get , encoding: URLEncoding.default).responseJSON { (response) in
         
                 switch response.result{
                 
                 case .failure(let error):
                     print("connection with server is falid \(error)")
-                    
                 case .success(let value):
                     print("connection with server is success \(value)")
                 
@@ -168,25 +155,18 @@ extension PostsViewController{
                         let email = user["email"] as? String
                         
                         
-                        guard  let address = user["address"] as? [String: Any] else {
-                            return
-                        }
+                        guard  let address = user["address"] as? [String: Any] else { return }
                         let street = address["street"] as? String
                         let city = address["city"] as? String
-                        
-                        
-                        guard let geo = address["geo"] as? [String: Any] else{
-                            return
-                        }
+       
+                        guard let geo = address["geo"] as? [String: Any] else{ return }
                         let lat = geo["lat"] as? String
                         let lng = geo["lng"] as? String
                         
                         let phone = user["phone"] as? String
                         let website = user["website"] as? String
                         
-                        guard let company = user["company"] as? [String: Any] else{
-                            return
-                        }
+                        guard let company = user["company"] as? [String: Any] else{ return }
                         let companyName = company["name"] as? String
                         let ctachPhrase = company["catchPhrase"] as? String
                         
